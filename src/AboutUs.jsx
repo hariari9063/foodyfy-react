@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./stylesheets/aboutUs.css";
+import "./stylesheets/aboutus.css";
 import { FaUsers, FaBoxOpen, FaSmile } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
