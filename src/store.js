@@ -1,0 +1,254 @@
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import NonVeg from "./NonVeg";
+
+// ✅ Utility: Load persisted state from localStorage (with fallback)
+const loadState = (key, fallback) => {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
+// ✅ Utility: Save state to localStorage
+const saveState = (key, state) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(state));
+  } catch {}
+};
+
+
+// ------------------ PRODUCTS SLICE ------------------
+let productsSlice = createSlice({
+  name: "products",
+  initialState: {
+    veg: [
+  { id: 1014, name: "Veg Korma", price: 180, unit: "Plate", imageUrl: "/Images/vegkorma.png", rating: 5 },
+  { id: 1007, name: "Vegetable Pulao", price: 150, unit: "Plate", imageUrl: "/Images/vegpulao.png", rating: 4 },
+  { id: 1009, name: "Veg Manchurian", price: 160, unit: "Plate", imageUrl: "/Images/vegmanchurian.png", rating: 4 },
+  { id: 1001, name: "Paneer Butter Masala", price: 180, unit: "Plate", imageUrl: "/Images/paneer.png", rating: 5 },
+  { id: 1002, name: "Dal Tadka", price: 150, unit: "Plate", imageUrl: "/Images/daltadka.png", rating: 4 },
+  { id: 1003, name: "Veg Biryani", price: 160, unit: "Plate", imageUrl: "/Images/vegbiryani.png", rating: 4 },
+  { id: 1004, name: "Chole Bhature", price: 120, unit: "Plate", imageUrl: "/Images/cholebhature.png", rating: 5 },
+  { id: 1005, name: "Palak Paneer", price: 190, unit: "Plate", imageUrl: "/Images/palakpaneer.png", rating: 4 },
+  { id: 1006, name: "Aloo Gobi", price: 140, unit: "Plate", imageUrl: "/Images/aloogobi.png", rating: 3 },
+  { id: 1008, name: "Malai Kofta", price: 200, unit: "Plate", imageUrl: "/Images/malaikofta.png", rating: 5 },
+  { id: 1010, name: "Shahi Paneer", price: 210, unit: "Plate", imageUrl: "/Images/shahipaneer.png", rating: 5 },
+  { id: 1011, name: "Matar Paneer", price: 180, unit: "Plate", imageUrl: "/Images/matarpaneer.png", rating: 4 },
+  { id: 1012, name: "Mix Veg Curry", price: 150, unit: "Plate", imageUrl: "/Images/mixveg.png", rating: 3 },
+  { id: 1013, name: "Peri Peri Fries", price: 150, unit: "Plate", imageUrl: "/Images/periperifries.png", rating: 5 },
+  { id: 1015, name: "Veg Spring Rolls", price: 160, unit: "Plate", imageUrl: "/Images/springrolls.png", rating: 4 },
+  { id: 1016, name: "Kadhi Pakora", price: 130, unit: "Plate", imageUrl: "/Images/kadhi.png", rating: 4 },
+ ],
+
+    nonVeg: [
+  { id: 3001, name: "Chicken Curry", price: 220, unit: "Plate", imageUrl: "/Images/chickencurry.png", rating: 4 },
+  { id: 3002, name: "Mutton Rogan Josh", price: 350, unit: "Plate", imageUrl: "/Images/muttoncurry.png", rating: 5 },
+  { id: 3003, name: "Chicken Biryani", price: 240, unit: "Plate", imageUrl: "/Images/chickenbiryani.png", rating: 5 },
+  { id: 3004, name: "Egg Curry", price: 130, unit: "Plate", imageUrl: "/Images/eggcurry.png", rating: 3 },
+  { id: 3005, name: "Fish Curry", price: 260, unit: "Plate", imageUrl: "/Images/fishcurry.png", rating: 4 },
+  { id: 3006, name: "Prawn Masala", price: 300, unit: "Plate", imageUrl: "/Images/prawnmasala.png", rating: 5 },
+  { id: 3007, name: "Chicken Korma", price: 250, unit: "Plate", imageUrl: "/Images/chickenkorma.png", rating: 4 },
+  { id: 3008, name: "Butter Chicken", price: 280, unit: "Plate", imageUrl: "/Images/butterchicken.png", rating: 5 },
+  { id: 3009, name: "Chicken Tikka Masala", price: 270, unit: "Plate", imageUrl: "/Images/chickentikka.png", rating: 5 },
+  { id: 3010, name: "Mutton Biryani", price: 360, unit: "Plate", imageUrl: "/Images/muttonbiryani.png", rating: 5 },
+  { id: 3011, name: "Fish Fry", price: 220, unit: "Plate", imageUrl: "/Images/fishfry.png", rating: 4 },
+  { id: 3012, name: "Crab Curry", price: 400, unit: "Plate", imageUrl: "/Images/crabcurry.png", rating: 4 },
+  { id: 3013, name: "Keema Curry", price: 280, unit: "Plate", imageUrl: "/Images/keema.png", rating: 4 },
+  { id: 3014, name: "Tandoori Chicken", price: 300, unit: "Plate", imageUrl: "/Images/tandoori.png", rating: 5 },
+  { id: 3015, name: "Chicken 65", price: 200, unit: "Plate", imageUrl: "/Images/chicken65.png", rating: 4 },
+  { id: 3016, name: "Hyderabadi Chicken Curry", price: 270, unit: "Plate", imageUrl: "/Images/hyderabadi.png", rating: 5 },
+],
+
+    drinks: [
+      { id: 2016, name: "Oreo Shake", price: 90, unit: "Glass", imageUrl: "/Images/oreoshake.png", rating: 5 },
+      { id: 2011, name: "Tropicana Orange", price: 50, unit: "1L", imageUrl: "/Images/tropicana.png", rating: 4 },
+      { id: 2001, name: "Coca Cola", price: 40, unit: "500ml", imageUrl: "/Images/product3.png", rating: 5 },
+      { id: 2002, name: "Pepsi", price: 40, unit: "500ml", imageUrl: "/Images/pepsi.png", rating: 4 },
+      { id: 2003, name: "Sprite", price: 35, unit: "500ml", imageUrl: "/Images/sprite.png", rating: 4 },
+      { id: 2004, name: "Fanta", price: 35, unit: "500ml", imageUrl: "/Images/fanta.png", rating: 3 },
+      { id: 2005, name: "Mountain Dew", price: 45, unit: "500ml", imageUrl: "/Images/mountaindew.png", rating: 5 },
+      { id: 2006, name: "7Up", price: 35, unit: "500ml", imageUrl: "/Images/7up.png", rating: 4 },
+      { id: 2007, name: "Red Bull", price: 120, unit: "250ml", imageUrl: "/Images/redbull.png", rating: 5 },
+      { id: 2008, name: "Appy Fizz", price: 25, unit: "500ml", imageUrl: "/Images/appyfizz.png", rating: 3 },
+      { id: 2009, name: "Slice", price: 30, unit: "500ml", imageUrl: "/Images/slice.png", rating: 4 },
+      { id: 2010, name: "Maaza", price: 30, unit: "500ml", imageUrl: "/Images/maaza.png", rating: 5 },
+      { id: 2012, name: "Paper Boat Aamras", price: 30, unit: "250ml", imageUrl: "/Images/paperboat.png", rating: 3 },
+      { id: 2013, name: "Minute Maid Pulpy Orange", price: 40, unit: "500ml", imageUrl: "/Images/minutemaid.png", rating: 4 },
+      { id: 2014, name: "Bisleri Soda", price: 20, unit: "750ml", imageUrl: "/Images/bislerisoda.png", rating: 3 },
+      { id: 2015, name: "Sting Energy", price: 25, unit: "250ml", imageUrl: "/Images/sting.png", rating: 4 },
+    ],
+    chocolates: [
+      { id: 4004, name: "5 Star", price: 25, unit: "Bar", imageUrl: "/Images/5star.png", rating: 4 },
+      { id: 4012, name: "Temptations", price: 100, unit: "Bar", imageUrl: "/Images/temptations.png", rating: 4 },
+      { id: 4001, name: "Dairy Milk", price: 40, unit: "Bar", imageUrl: "/Images/dairymilk.png", rating: 5 },
+      { id: 4002, name: "KitKat", price: 30, unit: "Bar", imageUrl: "/Images/kitkat.png", rating: 4 },
+      { id: 4003, name: "Perk", price: 20, unit: "Bar", imageUrl: "/Images/perk.png", rating: 3 },
+      { id: 4005, name: "Munch", price: 15, unit: "Bar", imageUrl: "/Images/munch.png", rating: 3 },
+      { id: 4006, name: "Snickers", price: 50, unit: "Bar", imageUrl: "/Images/snickers.png", rating: 5 },
+      { id: 4007, name: "Ferrero Rocher (4 pack)", price: 180, unit: "Pack", imageUrl: "/Images/ferrero.png", rating: 5 },
+      { id: 4008, name: "Bounty", price: 60, unit: "Bar", imageUrl: "/Images/bounty.png", rating: 4 },
+      { id: 4009, name: "Lindt", price: 300, unit: "Bar", imageUrl: "/Images/lindt.png", rating: 5 },
+      { id: 4010, name: "Toblerone", price: 250, unit: "Bar", imageUrl: "/Images/toblerone.png", rating: 5 },
+      { id: 4011, name: "MilkyBar", price: 25, unit: "Bar", imageUrl: "/Images/milkybar.png", rating: 3 },
+      { id: 4013, name: "Amul Dark", price: 120, unit: "Bar", imageUrl: "/Images/amuldark.png", rating: 5 },
+      { id: 4014, name: "Hershey’s", price: 200, unit: "Bar", imageUrl: "/Images/hersheys.png", rating: 4 },
+      { id: 4015, name: "Galaxy", price: 150, unit: "Bar", imageUrl: "/Images/galaxy.png", rating: 5 },
+      { id: 4016, name: "Ritter Sport", price: 220, unit: "Bar", imageUrl: "/Images/ritter.png", rating: 5 },
+    ],
+  },
+  reducers: {},
+});
+
+/* ------------------ User Slice ------------------ */
+const registerUserSlice = createSlice({
+  name: "registerUser",
+  initialState: {
+    isAuthenticated: !!localStorage.getItem("authUser"),
+    currentUsername: localStorage.getItem("authUser") || null,
+    users: JSON.parse(localStorage.getItem("users")) || [], // optional if you keep registered users
+  },
+  reducers: {
+    loginUser: (state, action) => {
+      const { username } = action.payload;
+      state.isAuthenticated = true;
+      state.currentUsername = username;
+      localStorage.setItem("authUser", username);
+    },
+    logoutUser: (state) => {
+      state.isAuthenticated = false;
+      state.currentUsername = null;
+      
+      localStorage.removeItem("authUser");
+    },
+    registerNewUser: (state, action) => {
+      const newUser = action.payload;
+      state.users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(state.users));
+    },
+  },
+});
+
+/* ------------------ Cart Slice ------------------ */
+const getInitialCart = () => {
+  const username = localStorage.getItem("authUser");
+  if (username) {
+    return JSON.parse(localStorage.getItem(`cart_${username}`)) || [];
+  }
+  return [];
+};
+
+const persistCart = (cart) => {
+  const username = localStorage.getItem("authUser");
+  if (username) {
+    localStorage.setItem(`cart_${username}`, JSON.stringify(cart));
+  }
+};
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: getInitialCart(),
+  reducers: {
+    setCart: (state, action) => {
+      persistCart(action.payload);
+      return action.payload;
+    },
+    addToCart: (state, action) => {
+      const item = state.find((i) => i.id === action.payload.id);
+      if (item) {
+        item.quantity += 1;
+      } else {
+        state.push({ ...action.payload, quantity: 1 });
+      }
+      persistCart(state);
+    },
+    removeFromCart: (state, action) => {
+      const newState = state.filter((i) => i.id !== action.payload);
+      persistCart(newState);
+      return newState;
+    },
+    increaseQty: (state, action) => {
+      const item = state.find((i) => i.id === action.payload);
+      if (item) item.quantity += 1;
+      persistCart(state);
+    },
+    reduceQty: (state, action) => {
+      const item = state.find((i) => i.id === action.payload);
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          const newState = state.filter((i) => i.id !== action.payload);
+          persistCart(newState);
+          return newState;
+        }
+      }
+      persistCart(state);
+    },
+    clearCart: () => {
+      persistCart([]);
+      return [];
+    },
+  },
+});
+
+const getInitialOrders = () => {
+  const username = localStorage.getItem("authUser");
+  if (username) {
+    return JSON.parse(localStorage.getItem(`orders_${username}`)) || [];
+  }
+  return [];
+};
+
+const persistOrders = (orders) => {
+  const username = localStorage.getItem("authUser");
+  if (username) {
+    localStorage.setItem(`orders_${username}`, JSON.stringify(orders));
+  }
+};
+
+const ordersSlice = createSlice({
+  name: "orders",
+  initialState: getInitialOrders(),
+  reducers: {
+    setOrders: (state, action) => {
+      persistOrders(action.payload);
+      return action.payload;
+    },
+    addOrder: (state, action) => {
+      const newState = [...state, action.payload];
+      persistOrders(newState);
+      return newState;
+    },
+    clearOrders: () => {
+      persistOrders([]);
+      return [];
+    },
+  },
+});
+
+export const { loginUser, logoutUser, registerNewUser } =
+  registerUserSlice.actions;
+
+export const {
+  setCart,
+  addToCart,
+  removeFromCart,
+  increaseQty,
+  reduceQty,
+  clearCart,
+} = cartSlice.actions;
+
+export const { setOrders, addOrder, clearOrders } = ordersSlice.actions;
+
+let store = configureStore({
+  reducer: {
+    products:productsSlice.reducer,
+    cart: cartSlice.reducer,
+    orders: ordersSlice.reducer,
+    registerUser: registerUserSlice.reducer,
+  },
+});
+
+export default store;
