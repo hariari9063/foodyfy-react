@@ -16,16 +16,16 @@ function AboutUs() {
   ];
 
   const team = [
-    { name: "Alice", role: "Founder & CEO", img: "/images/team1.jpg" },
-    { name: "Bob", role: "Head Chef", img: "/images/team2.jpg" },
-    { name: "Charlie", role: "Marketing Lead", img: "/images/team3.jpg" },
+    { name: "Alice", role: "Founder & CEO", img: "/Images/team1.jpg" },
+    { name: "Bob", role: "Head Chef", img: "/Images/team2.jpg" },
+    { name: "Charlie", role: "Marketing Lead", img: "/Images/team3.jpg" },
   ];
 
   return (
     <div className="aboutus-page">
-      {/* Hero Section */}
+  
       <section className="hero parallax">
-        <div className="overlay">
+        <div className="overlay text-center">
           <h1 data-aos="fade-up">We Make Delicious Memories 🍫🍗🥤</h1>
           <p data-aos="fade-up" data-aos-delay="200">
             Passionate about delivering joy, one product at a time.
@@ -33,56 +33,82 @@ function AboutUs() {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="mission-vision">
-        <div className="card" data-aos="fade-right">
-          <h2>Our Mission</h2>
-          <p>
-            To bring the finest chocolates, snacks, and drinks to every doorstep
-            with love, care, and quality.
-          </p>
-        </div>
-        <div className="card" data-aos="fade-left">
-          <h2>Our Vision</h2>
-          <p>
-            Becoming the most loved food brand by combining taste, innovation,
-            and happiness in every bite.
-          </p>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="stats parallax-light">
-        {stats.map((item, index) => (
-          <div key={index} className="stat-card" data-aos="zoom-in" data-aos-delay={index * 200}>
-            <div className="icon">{item.icon}</div>
-            <h3>{item.value}</h3>
-            <p>{item.label}</p>
-          </div>
-        ))}
-      </section>
-
-      {/* Team Section */}
-      <section className="team">
-        <h2 data-aos="fade-up">Meet Our Team</h2>
-        <div className="team-cards">
-          {team.map((member, index) => (
-            <div key={index} className="team-card" data-aos="flip-left" data-aos-delay={index * 200}>
-              <img src={member.img} alt={member.name} />
-              <h4>{member.name}</h4>
-              <p>{member.role}</p>
+      <section className="mission-vision container py-5">
+        <div className="row g-4">
+          <div className="col-md-6" data-aos="fade-right">
+            <div className="card shadow-sm p-4">
+              <h2>Our Mission</h2>
+              <p>
+                To bring the finest chocolates, snacks, and drinks to every doorstep
+                with love, care, and quality.
+              </p>
             </div>
-          ))}
+          </div>
+          <div className="col-md-6" data-aos="fade-left">
+            <div className="card shadow-sm p-4">
+              <h2>Our Vision</h2>
+              <p>
+                Becoming the most loved food brand by combining taste, innovation,
+                and happiness in every bite.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="cta parallax">
-        <h2 data-aos="fade-up">Ready to Explore?</h2>
-        <p data-aos="fade-up" data-aos-delay="200">
-          Check out our wide range of products and make your day delicious!
-        </p>
-        <button data-aos="zoom-in" data-aos-delay="400">Shop Now</button>
+      <section className="stats parallax-light text-center py-5">
+        <div className="container">
+          <div className="row g-4 justify-content-center">
+            {stats.map((item, index) => (
+              <div
+                key={index}
+                className="col-6 col-md-4"
+                data-aos="zoom-in"
+                data-aos-delay={index * 200}
+              >
+                <div className="stat-card shadow">
+                  <div className="icon">{item.icon}</div>
+                  <h3>{item.value}</h3>
+                  <p>{item.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="team py-5 text-center">
+        <h2 data-aos="fade-up" className="mb-4">Meet Our Team</h2>
+        <div className="container">
+          <div className="row g-4 justify-content-center">
+            {team.map((member, index) => (
+              <div
+                key={index}
+                className="col-10 col-sm-6 col-md-4"
+                data-aos="flip-left"
+                data-aos-delay={index * 200}
+              >
+                <div className="team-card shadow-sm">
+                  <img src={member.img} alt={member.name} />
+                  <h4>{member.name}</h4>
+                  <p>{member.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="cta parallax text-center text-white">
+        <div className="overlay-content">
+          <h2 data-aos="fade-up">Ready to Explore?</h2>
+          <p data-aos="fade-up" data-aos-delay="200">
+            Check out our wide range of products and make your day delicious!
+          </p>
+          <button className="btn btn-light btn-lg mt-3" data-aos="zoom-in" data-aos-delay="400">
+            Shop Now
+          </button>
+        </div>
       </section>
     </div>
   );
