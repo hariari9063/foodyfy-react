@@ -1,67 +1,187 @@
-/* Parallax for hero & stats */
+
+.aboutus-page {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  background: #fafafa;
+}
+
+
 .parallax {
-  background: url('/images/hero-bg.jpg') center/cover no-repeat fixed;
+  background: url("/images/hero-bg.jpg") center/cover no-repeat fixed;
   position: relative;
 }
 
 .parallax-light {
-  background: url('/images/stats-bg.jpg') center/cover no-repeat fixed;
+  background: url("/images/stats-bg.jpg") center/cover no-repeat fixed;
+  color: #fff;
 }
 
-/* Hero Section */
+
 .hero {
-  height: 60vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  text-align: center;
 }
 
 .hero .overlay {
   background: rgba(0, 0, 0, 0.55);
-  padding: 50px;
-  border-radius: 12px;
-  text-align: center;
+  padding: 60px 30px;
+  border-radius: 16px;
   color: #fff;
+  max-width: 800px;
 }
 
-/* Mission & Vision cards */
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+
+.mission-vision h2 {
+  color: #ff7043;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.mission-vision p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 .mission-vision .card {
+  background: #fff;
+  border: none;
+  border-radius: 16px;
+  transition: all 0.4s ease;
+}
+
+.mission-vision .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 30px;
+  transition: transform 0.4s ease, background 0.4s ease;
+}
+
+.stat-card .icon {
+  font-size: 2.5rem;
+  color: #ffe082;
+  margin-bottom: 15px;
+}
+
+.stat-card h3 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.stat-card p {
+  margin-top: 5px;
+  font-size: 1.1rem;
+}
+
+.stat-card:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.team h2 {
+  color: #ff7043;
+  font-weight: 700;
+}
+
+.team-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
-.mission-vision .card:hover {
-  transform: translateY(-15px) scale(1.05);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-}
 
-/* Stats Cards */
-.stat-card {
-  transition: transform 0.4s ease;
-}
-.stat-card:hover {
-  transform: scale(1.1);
-}
-
-/* Team Card Flip */
-.team-card {
-  perspective: 1000px;
-}
 .team-card img {
-  transition: transform 0.6s ease;
-}
-.team-card:hover img {
-  transform: rotateY(180deg);
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
-/* CTA Section */
-.cta {
-  border-radius: 12px;
-  margin: 60px 20px;
-  padding: 60px 20px;
-  background: linear-gradient(135deg, #ffcc80, #ff8a65);
-  text-align: center;
-  color: #fff;
+.team-card h4 {
+  font-weight: 600;
+  color: #333;
 }
+
+.team-card p {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Call to Action ===== */
+.cta {
+  background: linear-gradient(135deg, #ff8a65, #ff7043);
+  padding: 80px 20px;
+  margin-top: 60px;
+  border-radius: 0;
+  position: relative;
+}
+
+.cta .overlay-content {
+  background: rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  padding: 50px;
+  border-radius: 16px;
+}
+
+.cta h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.cta p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.cta button {
+  font-weight: 600;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
 .cta button:hover {
   transform: scale(1.1);
-  background: #ffe0b2;
+  background: #fff3e0;
+  color: #ff7043;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .team-card img {
+    height: 220px;
+  }
+  .cta .overlay-content {
+    padding: 30px;
+  }
 }
